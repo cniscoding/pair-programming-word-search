@@ -1,8 +1,29 @@
-const wordSearch = (letters, word) => { 
-    const horizontalJoin = letters.map(ls => ls.join(''))
-    for (l of horizontalJoin) {
-        if (l.includes(word)) return true
+const wordSearch = (letters, word) => {
+  if (letters.length === 0) {
+    return false;
+  }
+  let newArray = [];
+  for (let i = 0; i < letters[0].length; i++) {
+    newArray[i] = [];
+  }
+  
+  for (let row = 0; row < letters.length; row++) {
+    for (let co = 0; co < letters[row].length; co++) {
+      newArray[co][row] = letters[row][co];
     }
-}
+  }
 
-module.exports = wordSearch
+  const verticalJoin = newArray.map(ls => ls.join(''));
+  for (l of verticalJoin) {
+    if (l.includes(word)) return true;
+  }
+  
+
+  const horizontalJoin = letters.map(ls => ls.join(''));
+  for (l of horizontalJoin) {
+    if (l.includes(word)) return true;
+  }
+  return false;
+};
+
+module.exports = wordSearch;
